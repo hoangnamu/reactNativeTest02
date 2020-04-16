@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme'
+import {shallow} from 'enzyme'
 
 import Homepage from './../Homepage.component';
 
@@ -16,22 +16,29 @@ describe('Homepage Test', () => {
     })
 
     it('should navigate to anonymous users', () => {
-        expect(false).toBe(true)
-
+        const props = {navigation: {navigate: jest.fn()}}
+        const wrapper = shallow(<Homepage {...props}/>)
+        wrapper.find('TouchableOpacity').first().props().onPress()
+        expect(props.navigation.navigate).toBeCalledWith('user', {userType: 'anonymous'})
     })
 
     it('should turn trial version when navigating to anonymous user', () => {
-        expect(false).toBe(true)
-
+        const props = {navigation: {navigate: jest.fn()}}
+        const wrapper = shallow(<Homepage{...props}/>)
+        wrapper.find('TouchableOpacity').first().props().onPress()
+        expect(wrapper.state().isTrial).toBe(true)
     })
 
     it('should navigate to professional users', () => {
-        expect(false).toBe(true)
-
+        const props = {navigation: {navigate: jest.fn()}}
+        const wrapper = shallow(<Homepage{...props}/>)
+        wrapper.find('TouchableOpacity').at(1).props().onPress()
+        expect(props.navigation.navigate).toBeCalledWith('user', {userType: 'professional'})
     })
 
     it('should navigate to premium users', () => {
-        expect(false).toBe(true)
-
-    })
+        const props = {navigation: {navigate: jest.fn()}}
+        const wrapper = shallow(<Homepage{...props}/>)
+        wrapper.find('TouchableOpacity').at(2).props().onPress()
+        expect(props.navigation.navigate).toBeCalledWith('user', {userType: 'premium'})    })
 })
